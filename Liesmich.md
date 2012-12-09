@@ -18,16 +18,16 @@ Mit dem Frachtaustausch per Drohne ist es möglich, Waren über große Strecken hin
 * Frachtdrohne
 
 ## Installation/Update:
-* Den Inhalt des Ordners "t" in den "X3 TC\t" Ordner kopieren
-* Den Inhalt des Ordners "scripts" in den "X3 TC\scripts" Ordner kopieren
+* Den Inhalt des Ordners `t` in den `X3 TC\t` Ordner kopieren
+* Den Inhalt des Ordners `scripts` in den `X3 TC\scripts` Ordner kopieren
 * Wenn die String-Library von ChemODur bereits installiert ist, kann diese Version ruhig darübergeschrieben werden. Sie enthält ein paar kleine fixes für deutsche Buchstaben.
 
 
 ## Deinstallation:
 * Im Spiel alle laufenden Frachttransfere abbrechen (den Drohnen einen anderen Befehl geben oder einsammeln)
 * Speichern
-* X3 verlassen und die Dateien des Skripts aus dem "scripts" Ordner löschen (s. "Verwendete Dateien")
-* Die t-Datei aus dem "t" Ordner löschen (s. "Verwendete Dateien")
+* X3 verlassen und die Dateien des Skripts aus dem `scripts` Ordner löschen (s. "Verwendete Dateien")
+* Die t-Datei aus dem `t` Ordner löschen (s. "Verwendete Dateien")
 
 ## Verhalten:
 Wenn mehr Waren eingestellt werden, als eine Drohne transportieren kann, werden mehrere Drohnen gestartet und die Waren auf diese aufgeteilt.

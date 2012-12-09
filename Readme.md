@@ -18,15 +18,15 @@ This command allows you to transfer freight to and from a station or ship over l
 * Freight Drone
 
 ## Installation/Update:
-* Copy the contents of the "t" folder into the X3 TC\t folder
-* Copy the contents of the "scripts" folder into the X3 TC\scripts folder
+* Copy the contents of the `t` folder into the `X3 TC\t` folder
+* Copy the contents of the `scripts` folder into the `X3 TC\scripts` folder
 * If ChemODur's string library is already installed, the t files of it can be overwritten with the ones contained in this package. They contain minor fixes for german letters.
 
 ## Deinstallation:
 * Cancel all running transfers (collect the drones or give them another command)
 * Save
-* Quit X3 and remove the scripts' files from the "scripts" folder (see "Used Files")
-* Remove the language file from the "t" folder (see "Used Files")
+* Quit X3 and remove the scripts' files from the `scripts` folder (see "Used Files")
+* Remove the language file from the `t` folder (see "Used Files")
 
 ## Behaviour:
 If more wares than a single drone can carry are selected more drones are used and the selected wares are distributed between them.
