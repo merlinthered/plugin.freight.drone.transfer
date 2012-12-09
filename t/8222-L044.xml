@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<language id="44">
+
+<page id="2008" title="Script Object Commands" descr="0">
+ <t id="422">COMMAND_DRONE_WARE_EXCHANGE</t>
+</page>
+
+<page id="2010" title="Cmd Name" descr="COMMAND_DRONE_WARE_EXCHANGE">
+ <t id="422">\033YTransfer Freight via Drones\033X</t>
+</page>
+
+<page id="2011" title="Cmd Short" descr="short">
+ <t id="422">TransFrDrone</t>
+</page>
+
+<page id="2022" title="Cmd Desc" descr="">
+ <t id="422">This command allows you to transfer freight to and from a station or ship over large distances. Intergalactic Trade Software Standards now make it possible for the drones to trade with foreign stations. Due to their size freight drones can only be used by big ships.</t>
+</page>
+
+<page id="8222" title="Txt Res" descr="">
+
+<t id="100">Transfer Freight via Drones</t>
+<t id="10">This command allows you to transfer freight to and from a station or ship over large distances. Intergalactic Trade Software Standards now make it possible for the drones to trade with foreign stations. Due to their size freight drones can only be used by big ships.</t>
+
+<t id="1">*****Menu: Select Target*****</t>
+<t id="101">Current Target: \33B%s\33X</t>
+<t id="102">Nearest Own Ship: \33B%s\33X</t>
+<t id="103">Nearest Station: \33B%s\33X</t>
+<t id="104">Select Own Ship...</t>
+<t id="105">Select Station...</t>
+<t id="108">Select one of your Ships</t>
+<t id="109">Select a Station</t>
+
+<t id="1">*****Menu: Select Wares*****</t>
+<t id="111">Available Drones: %s</t>
+<t id="112">Destination: %s</t>
+<t id="113">Onward Space Used: %s/%s</t>
+<t id="114">Return Space Used: %s/%s</t>
+
+<t id="115">\33RStart Transfer</t>
+<t id="116">\33GStart Transfer</t>
+
+<t id="117">Transfer to Destination</t>
+<t id="118">Transfer back from Destination</t>
+<t id="119">Add Ware...</t>
+
+<t id="1">*****Other Prompts*****</t>
+<t id="120">%-32s%+12s%+7s  %+3s</t>
+<t id="121">Enter Amount</t>
+<t id="122">Change Amount \(0 to remove\): %s</t>
+<t id="126">Select Ware</t>
+<t id="127">Current Stock</t>
+<t id="128">Vol</t>
+<t id="129">TC</t>
+<t id="130">%-32s%+12s%+7s  %+3s</t>
+
+</page>
+</language>

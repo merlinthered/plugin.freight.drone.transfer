@@ -1,0 +1,273 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>plugin.freight.drone.gui</name>
+<version>7</version>
+<engineversion>42</engineversion>
+<description>Opens the Graphical User Interface for the freight transfer script</description>
+<arguments>
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$Debug&#160;=&#160;</var><var>[FALSE]</var></line>
+<line linenr="002" indent=""></line>
+<line linenr="003" indent=""><var>$retarray&#160;=&#160;</var><var>null</var></line>
+<line linenr="004" indent=""></line>
+<line linenr="005" indent=""><var>while&#160;not&#160;</var><var>$retarray</var></line>
+<line linenr="006" indent="&#160;"></line>
+<line linenr="007" interruptable="@" indent="&#160;"><var>$target&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>plugin.freight.drone.target</call><text>&#160;:&#160;</text></line>
+<line linenr="008" indent="&#160;"></line>
+<line linenr="009" indent="&#160;"><var>if&#160;not&#160;</var><var>$target</var></line>
+<line linenr="010" indent="&#160;&#160;"><text>return&#160;</text><var>null</var></line>
+<line linenr="011" indent="&#160;"><text>end</text></line>
+<line linenr="012" indent="&#160;"></line>
+<line linenr="013" interruptable="@" indent="&#160;"><var>$retarray&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>plugin.freight.drone.wares</call><text>&#160;:&#160;</text><text>&#160;target&#160;of&#160;transfer=</text><var>$target</var></line>
+<line linenr="014" indent="&#160;"></line>
+<line linenr="015" indent=""><text>end</text></line>
+<line linenr="016" indent=""></line>
+<line linenr="017" indent=""><var>$ware.names.to&#160;=&#160;</var><var>$retarray</var><text>[</text><var>0</var><text>]</text></line>
+<line linenr="018" indent=""><var>$ware.amount.to&#160;=&#160;</var><var>$retarray</var><text>[</text><var>1</var><text>]</text></line>
+<line linenr="019" indent=""><var>$ware.names.from&#160;=&#160;</var><var>$retarray</var><text>[</text><var>2</var><text>]</text></line>
+<line linenr="020" indent=""><var>$ware.amount.from&#160;=&#160;</var><var>$retarray</var><text>[</text><var>3</var><text>]</text></line>
+<line linenr="021" indent=""></line>
+<line linenr="022" indent=""><var>=&#160;</var><text>speak&#160;text:&#160;page=</text><var>13</var><text>&#160;id=</text><var>131</var><text>&#160;priority=</text><var>0</var></line>
+<line linenr="023" indent=""></line>
+<line linenr="024" indent=""><var>$task&#160;=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;get&#160;next&#160;available&#160;task:&#160;starting=</text><var>100</var></line>
+<line linenr="025" indent=""><var>[THIS]&#160;-&gt;</var><text>&#160;start&#160;task&#160;</text><var>$task</var><text>&#160;with&#160;script&#160;</text><call>plugin.freight.drone.transfer</call><text>&#160;and&#160;prio&#160;</text><var>0</var><text>:&#160;arg1=</text><var>$target</var><text>&#160;arg2=</text><var>$ware.names.to</var><text>&#160;arg3=</text><var>$ware.amount.to</var><text>&#160;arg4=</text><var>$ware.names.from</var><text>&#160;arg5=</text><var>$ware.amount.from</var></line>
+<line linenr="026" indent=""><comment>*=&#160;[THIS]&#160;-&gt;<text>&#160;call&#160;script&#160;</text>plugin.freight.drone.transfer<text>&#160;:&#160;</text><text>&#160;target&#160;of&#160;transport=</text>$target&#160;<text>&#160;array&#160;of&#160;wares&#160;to&#160;deliver=</text>$ware.names.to&#160;<text>&#160;array&#160;of&#160;ware&#160;amounts=</text>$ware.amount.to&#160;<text>&#160;array&#160;of&#160;wares&#160;to&#160;bring&#160;back=</text>$ware.names.from&#160;<text>&#160;array&#160;of&#160;ware&#160;amounts=</text>$ware.amount.from</comment></line>
+<line linenr="027" indent=""></line>
+<line linenr="028" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="plugin.freight.drone.gui"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Opens the Graphical User Interface for the freight transfer script"/>
+  <sval type="int" val="7"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="8">
+    <sval type="string" val="Debug"/>
+    <sval type="string" val="retarray"/>
+    <sval type="string" val="target"/>
+    <sval type="string" val="ware.names.to"/>
+    <sval type="string" val="ware.amount.to"/>
+    <sval type="string" val="ware.names.from"/>
+    <sval type="string" val="ware.amount.from"/>
+    <sval type="string" val="task"/>
+  </sval>
+  <sval type="array" size="16">
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-536868854"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="102"/>
+      <sval type="string" val="plugin.freight.drone.target"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-536869372"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="plugin.freight.drone.wares"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="3"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="1042"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="1462"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="100"/>
+    </sval>
+    <sval type="array" size="18">
+      <sval type="int" val="1017"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="plugin.freight.drone.transfer"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+  <sval type="array" size="13">
+    <sval type="array" size="2">
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="3"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="6"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="6"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="7"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="12"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="13"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="18">
+      <sval type="int" val="15"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="102"/>
+      <sval type="string" val="plugin.freight.drone.transfer"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="target"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="ware.names.to"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="ware.amount.to"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="ware.names.from"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="ware.amount.from"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="15"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<language id="49">
+
+<page id="2008" title="Script Object Commands" descr="0">
+ <t id="422">COMMAND_DRONE_WARE_EXCHANGE</t>
+</page>
+
+<page id="2010" title="Cmd Name" descr="COMMAND_DRONE_WARE_EXCHANGE">
+ <t id="422">\033YFrachtaustausch per Drohne\033X</t>
+</page>
+
+<page id="2011" title="Cmd Short" descr="short">
+ <t id="422">FrTauDrohne</t>
+</page>
+
+<page id="2022" title="Cmd Desc" descr="">
+ <t id="422">Mit dem Frachtaustausch per Drohne ist es möglich, Waren über große Strecken hinweg zwischen Schiffen und Stationen sowie zwischen Schiffen untereinander auszutauschen. Aufgrund der Nutzung von intergalaktischen Handelssoftware-Standards ist es nun auch möglich, die Drohnen an fremden Stationen ein- und verkaufen zu lassen. Durch ihre Größe bedingt können Frachtdrohnen nur von großen Schiffen eingesetzt werden.</t>
+</page>
+
+<page id="8222" title="Txt Res" descr="">
+
+<t id="100">Frachtaustausch per Drohne</t>
+<t id="10">Mit dem Frachtaustausch per Drohne ist es möglich, Waren über große Strecken hinweg zwischen Schiffen und Stationen sowie zwischen Schiffen untereinander auszutauschen. Aufgrund der Nutzung von intergalaktischen Handelssoftware-Standards ist es nun auch möglich, die Drohnen an fremden Stationen ein- und verkaufen zu lassen. Durch ihre Größe bedingt können Frachtdrohnen nur von großen Schiffen eingesetzt werden.</t>
+
+<t id="1">*****Menu: Select Target*****</t>
+<t id="101">Momentanes Ziel: \33B%s\33X</t>
+<t id="102">Nächstes eigenes Schiff: \33B%s\33X</t>
+<t id="103">Nächste Station: \33B%s\33X</t>
+<t id="104">Eigenes Schiff wählen...</t>
+<t id="105">Station wählen...</t>
+<t id="108">Wählen Sie eines ihrer Schiffe</t>
+<t id="109">Wählen Sie eine Station</t>
+
+<t id="1">*****Menu: Select Wares*****</t>
+<t id="111">Verfügbare Drohnen: %s</t>
+<t id="112">Ziel: %s</t>
+<t id="113">Laderaum genutzt auf Hinweg: %s/%s</t>
+<t id="114">Laderaum genutzt auf Rückweg: %s/%s</t>
+
+<t id="115">\33RStarte Transfer</t>
+<t id="116">\33GStarte Transfer</t>
+
+<t id="117">Frachttransfer zum Ziel</t>
+<t id="118">Frachttransfer vom Ziel</t>
+<t id="119">Ware hinzufügen...</t>
+
+<t id="1">*****Other Prompts*****</t>
+<t id="120">%-32s%+12s%+7s  %+3s</t>
+<t id="121">Anzahl auswählen</t>
+<t id="122">Anzahl ändern \(0 zum entfernen\): %s</t>
+<t id="126">Ware auswählen</t>
+<t id="127">Auf Lager</t>
+<t id="128">Vol</t>
+<t id="129">TK</t>
+<t id="130">%-32s%+12s%+7s  %+3s</t>
+</page>
+</language>

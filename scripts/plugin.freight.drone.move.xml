@@ -1,0 +1,786 @@
+<?xml version="1.0" standalone="yes" ?>
+<?xml-stylesheet href="x2script.xsl" type="text/xsl" ?>
+<script>
+<name>plugin.freight.drone.move</name>
+<version>7</version>
+<engineversion>42</engineversion>
+<description>Moves to an object with a defined precision, reacting to position changes</description>
+<arguments>
+<argument index="1" name="target" type="Var/Ship/Station" desc="target to follow" />
+<argument index="2" name="precision" type="Var/Number" desc="precision" />
+</arguments>
+<sourcetext>
+<line linenr="001" indent=""><var>$Debug&#160;=&#160;</var><var>[FALSE]</var></line>
+<line linenr="002" indent=""></line>
+<line linenr="003" indent=""><var>$aship&#160;=&#160;</var><var>[THIS]</var></line>
+<line linenr="004" indent=""></line>
+<line linenr="005" indent=""><text>gosub&#160;</text><var>check.existence</var></line>
+<line linenr="006" indent=""></line>
+<line linenr="007" indent=""><var>$hardprecision&#160;=&#160;</var><var>$precision</var><text>&#160;</text><var>/</var><text>&#160;</text><var>2</var></line>
+<line linenr="008" indent=""></line>
+<line linenr="009" indent=""><var>$dist&#160;=&#160;</var><var>0</var></line>
+<line linenr="010" indent=""><var>$insector&#160;=&#160;</var><var>[FALSE]</var></line>
+<line linenr="011" indent=""></line>
+<line linenr="012" indent=""><text>gosub&#160;</text><var>check.distance</var></line>
+<line linenr="013" indent=""></line>
+<line linenr="014" indent=""><text>gosub&#160;</text><var>update.sectors</var></line>
+<line linenr="015" indent=""></line>
+<line linenr="016" indent=""><var>while&#160;</var><var>!</var><text>&#160;</text><var>$insector</var><text>&#160;</text><var>OR</var><text>&#160;</text><var>$dist</var><text>&#160;</text><var>&gt;</var><text>&#160;</text><var>$precision</var></line>
+<line linenr="017" indent="&#160;"></line>
+<line linenr="018" indent="&#160;"><var>if&#160;</var><var>$insector</var></line>
+<line linenr="019" indent="&#160;&#160;"></line>
+<line linenr="020" indent="&#160;&#160;"><var>skip&#160;if&#160;not&#160;</var><var>$Debug</var></line>
+<line linenr="021" indent="&#160;&#160;&#160;"><text>write&#160;to&#160;player&#160;logbook:&#160;printf:&#160;fmt=</text><var>'In&#160;same&#160;Sector&#160;as&#160;%s&#160;-&#160;following'</var><text>,&#160;</text><var>$target</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="022" indent="&#160;&#160;"></line>
+<line linenr="023" interruptable="@" indent="&#160;&#160;"><var>=&#160;</var><var>$aship&#160;-&gt;</var><text>&#160;follow&#160;</text><var>$target</var><text>&#160;with&#160;precision&#160;</text><var>$hardprecision</var><text>&#160;m&#160;:&#160;timeout=</text><var>10000</var><text>&#160;ms</text></line>
+<line linenr="024" indent="&#160;&#160;"></line>
+<line linenr="025" indent="&#160;"><text>else</text></line>
+<line linenr="026" indent="&#160;&#160;"><var>$nextgate&#160;=&#160;</var><text>&#160;get&#160;next&#160;gate&#160;on&#160;route&#160;from&#160;</text><var>$this.sector</var><text>&#160;to&#160;</text><var>$target.sector</var></line>
+<line linenr="027" indent="&#160;&#160;"><var>$gate.pos&#160;=&#160;</var><var>$nextgate&#160;-&gt;</var><text>&#160;get&#160;position&#160;as&#160;array</text></line>
+<line linenr="028" indent="&#160;&#160;"><var>$gate.distance&#160;=&#160;</var><var>$aship&#160;-&gt;</var><text>&#160;get&#160;distance&#160;to:&#160;position&#160;array=</text><var>$gate.pos</var></line>
+<line linenr="029" indent="&#160;&#160;"></line>
+<line linenr="030" indent="&#160;&#160;"><var>if&#160;</var><var>$gate.distance</var><text>&#160;</text><var>&lt;</var><text>&#160;</text><var>5000</var></line>
+<line linenr="031" indent="&#160;&#160;&#160;"></line>
+<line linenr="032" indent="&#160;&#160;&#160;"><var>skip&#160;if&#160;not&#160;</var><var>$Debug</var></line>
+<line linenr="033" indent="&#160;&#160;&#160;&#160;"><text>write&#160;to&#160;player&#160;logbook:&#160;printf:&#160;fmt=</text><var>'Moving&#160;through&#160;next&#160;Gate:&#160;%s'</var><text>,&#160;</text><var>$nextgate</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="034" indent="&#160;&#160;&#160;"></line>
+<line linenr="035" interruptable="@" indent="&#160;&#160;&#160;"><var>=&#160;</var><var>$aship&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>!move.movethroughgate</call><text>&#160;:&#160;</text><text>&#160;Select&#160;the&#160;gate=</text><var>$nextgate</var></line>
+<line linenr="036" indent="&#160;&#160;&#160;"></line>
+<line linenr="037" indent="&#160;&#160;"><text>else</text></line>
+<line linenr="038" indent="&#160;&#160;&#160;"></line>
+<line linenr="039" indent="&#160;&#160;&#160;"><var>$gate.x&#160;=&#160;</var><var>$gate.pos</var><text>[</text><var>0</var><text>]</text></line>
+<line linenr="040" indent="&#160;&#160;&#160;"><var>$gate.y&#160;=&#160;</var><var>$gate.pos</var><text>[</text><var>1</var><text>]</text></line>
+<line linenr="041" indent="&#160;&#160;&#160;"><var>$gate.z&#160;=&#160;</var><var>$gate.pos</var><text>[</text><var>2</var><text>]</text></line>
+<line linenr="042" indent="&#160;&#160;&#160;"></line>
+<line linenr="043" indent="&#160;&#160;&#160;"><var>$gate.precision&#160;=&#160;</var><var>$gate.distance</var><text>&#160;</text><var>/</var><text>&#160;</text><var>2</var></line>
+<line linenr="044" indent=""><comment>*$gate.precision&#160;=&#160;2000</comment></line>
+<line linenr="045" indent="&#160;&#160;&#160;"></line>
+<line linenr="046" indent="&#160;&#160;&#160;"><var>skip&#160;if&#160;not&#160;</var><var>$Debug</var></line>
+<line linenr="047" indent="&#160;&#160;&#160;&#160;"><text>write&#160;to&#160;player&#160;logbook:&#160;printf:&#160;fmt=</text><var>'Not&#160;in&#160;same&#160;sector&#160;with&#160;%s.&#160;Moving&#160;to&#160;next&#160;gate:&#160;%s'</var><text>,&#160;</text><var>$target</var><text>,&#160;</text><var>$nextgate</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="048" indent="&#160;&#160;&#160;"></line>
+<line linenr="049" indent=""><comment>*=&#160;$aship&#160;-&gt;<text>&#160;move&#160;to&#160;position&#160;continue:&#160;x=</text>$gate.x<text>&#160;y=</text>$gate.y<text>&#160;z=</text>$gate.z<text>&#160;with&#160;precision&#160;</text>$gate.precision<text>&#160;m</text></comment></line>
+<line linenr="050" indent=""><comment>*=&#160;$aship&#160;-&gt;<text>&#160;move&#160;to&#160;position:&#160;x=</text>$gate.x<text>&#160;y=</text>$gate.y<text>&#160;z=</text>$gate.z<text>&#160;with&#160;precision&#160;</text>$gate.precision<text>&#160;m</text></comment></line>
+<line linenr="051" interruptable="@" indent="&#160;&#160;&#160;"><var>=&#160;</var><var>[THIS]&#160;-&gt;</var><text>&#160;call&#160;script&#160;</text><call>!move.movetoobject.samesector</call><text>&#160;:&#160;</text><text>&#160;Target=</text><var>$nextgate</var><text>&#160;</text><text>&#160;Range=</text><var>$gate.precision</var></line>
+<line linenr="052" indent="&#160;&#160;&#160;"></line>
+<line linenr="053" indent="&#160;&#160;"><text>end</text></line>
+<line linenr="054" indent="&#160;"><text>end</text></line>
+<line linenr="055" indent="&#160;"></line>
+<line linenr="056" indent="&#160;"><text>gosub&#160;</text><var>check.existence</var></line>
+<line linenr="057" indent="&#160;"><text>gosub&#160;</text><var>check.distance</var></line>
+<line linenr="058" indent="&#160;"><text>gosub&#160;</text><var>update.sectors</var></line>
+<line linenr="059" indent="&#160;"></line>
+<line linenr="060" indent=""><text>end</text></line>
+<line linenr="061" indent=""></line>
+<line linenr="062" indent=""><var>skip&#160;if&#160;not&#160;</var><var>$Debug</var></line>
+<line linenr="063" indent="&#160;"><text>write&#160;to&#160;player&#160;logbook:&#160;printf:&#160;fmt=</text><var>'Reached&#160;%s'</var><text>,&#160;</text><var>$target</var><text>,&#160;</text><var>$nextgate</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var><text>,&#160;</text><var>null</var></line>
+<line linenr="064" indent=""></line>
+<line linenr="065" indent=""><text>return&#160;</text><var>FLRET_TARGETREACHED</var></line>
+<line linenr="066" indent=""></line>
+<line linenr="067" indent=""><comment><text>*&#160;</text><var>--------------------------------------------------------------------------------</var></comment></line>
+<line linenr="068" indent=""><var>update.sectors</var><text>:</text></line>
+<line linenr="069" indent=""></line>
+<line linenr="070" indent=""><var>$this.sector&#160;=&#160;</var><var>$aship&#160;-&gt;</var><text>&#160;get&#160;sector</text></line>
+<line linenr="071" indent=""><var>$target.sector&#160;=&#160;</var><var>$target&#160;-&gt;</var><text>&#160;get&#160;sector</text></line>
+<line linenr="072" indent=""></line>
+<line linenr="073" indent=""><text>endsub</text></line>
+<line linenr="074" indent=""><comment><text>*&#160;</text><var>--------------------------------------------------------------------------------</var></comment></line>
+<line linenr="075" indent=""><var>check.distance</var><text>:</text></line>
+<line linenr="076" indent=""></line>
+<line linenr="077" indent=""><var>$target.pos&#160;=&#160;</var><var>$target&#160;-&gt;</var><text>&#160;get&#160;position&#160;as&#160;array</text></line>
+<line linenr="078" indent=""></line>
+<line linenr="079" indent=""><var>$dist&#160;=&#160;</var><var>$aship&#160;-&gt;</var><text>&#160;get&#160;distance&#160;to:&#160;position&#160;array=</text><var>$target.pos</var></line>
+<line linenr="080" indent=""><var>$insector&#160;=&#160;</var><var>$aship&#160;-&gt;</var><text>&#160;is&#160;in&#160;same&#160;sector&#160;as&#160;</text><var>$target</var></line>
+<line linenr="081" indent=""></line>
+<line linenr="082" indent=""><text>endsub</text></line>
+<line linenr="083" indent=""></line>
+<line linenr="084" indent=""><comment><text>*&#160;</text><var>--------------------------------------------------------------------------------</var></comment></line>
+<line linenr="085" indent=""><var>check.existence</var><text>:</text></line>
+<line linenr="086" indent=""><var>if&#160;not&#160;</var><var>$target&#160;-&gt;</var><text>&#160;exists</text></line>
+<line linenr="087" indent="&#160;"></line>
+<line linenr="088" indent="&#160;"><var>skip&#160;if&#160;not&#160;</var><var>$Debug</var></line>
+<line linenr="089" indent="&#160;&#160;"><text>write&#160;to&#160;player&#160;logbook&#160;</text><var>'Target&#160;destroyed'</var></line>
+<line linenr="090" indent="&#160;"></line>
+<line linenr="091" indent="&#160;"><text>return&#160;</text><var>FLRET_ERROR</var></line>
+<line linenr="092" indent=""><text>end</text></line>
+<line linenr="093" indent=""><text>endsub</text></line>
+<line linenr="094" indent=""></line>
+<line linenr="095" indent=""><text>return&#160;</text><var>null</var></line>
+</sourcetext>
+<codearray>
+
+<sval type="array" size="10">
+  <sval type="string" val="plugin.freight.drone.move"/>
+  <sval type="int" val="42"/>
+  <sval type="string" val="Moves to an object with a defined precision, reacting to position changes"/>
+  <sval type="int" val="7"/>
+  <sval type="int" val="0"/>
+  <sval type="array" size="17">
+    <sval type="string" val="target"/>
+    <sval type="string" val="precision"/>
+    <sval type="string" val="Debug"/>
+    <sval type="string" val="aship"/>
+    <sval type="string" val="hardprecision"/>
+    <sval type="string" val="dist"/>
+    <sval type="string" val="insector"/>
+    <sval type="string" val="nextgate"/>
+    <sval type="string" val="this.sector"/>
+    <sval type="string" val="target.sector"/>
+    <sval type="string" val="gate.pos"/>
+    <sval type="string" val="gate.distance"/>
+    <sval type="string" val="gate.x"/>
+    <sval type="string" val="gate.y"/>
+    <sval type="string" val="gate.z"/>
+    <sval type="string" val="gate.precision"/>
+    <sval type="string" val="target.pos"/>
+  </sval>
+  <sval type="array" size="52">
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1167"/>
+      <sval type="int" val="45"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="14"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="14"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="9"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1167"/>
+      <sval type="int" val="40"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1167"/>
+      <sval type="int" val="36"/>
+    </sval>
+    <sval type="array" size="22">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610604279"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="65556"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="65556"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="-3"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="-4"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610609149"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610609656"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="402"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="In same Sector as %s - following"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="10">
+      <sval type="int" val="563"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="10000"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="29"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="1074"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="8"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="795"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="797"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610607101"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="5000"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610607608"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="402"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="Moving through next Gate: %s"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="8">
+      <sval type="int" val="102"/>
+      <sval type="string" val="!move.movethroughgate"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="29"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="12"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="13"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="1"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="129"/>
+      <sval type="int" val="14"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="10"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="104"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="11"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="15"/>
+      <sval type="int" val="14"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="-1"/>
+      <sval type="int" val="14"/>
+      <sval type="int" val="-2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610605560"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="402"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="Not in same sector with %s. Moving to next gate: %s"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="10">
+      <sval type="int" val="102"/>
+      <sval type="string" val="!move.movetoobject.samesector"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131075"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="15"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1167"/>
+      <sval type="int" val="45"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1167"/>
+      <sval type="int" val="40"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="1167"/>
+      <sval type="int" val="36"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="112"/>
+      <sval type="int" val="8"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610603768"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="13">
+      <sval type="int" val="402"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="Reached %s"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="7"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="19"/>
+      <sval type="int" val="10"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="101"/>
+      <sval type="string" val="update.sectors"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="703"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="8"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="703"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="9"/>
+    </sval>
+    <sval type="array" size="1">
+      <sval type="int" val="1168"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="101"/>
+      <sval type="string" val="check.distance"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="795"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="16"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="797"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="5"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="16"/>
+    </sval>
+    <sval type="array" size="6">
+      <sval type="int" val="733"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="6"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+    </sval>
+    <sval type="array" size="1">
+      <sval type="int" val="1168"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="101"/>
+      <sval type="string" val="check.existence"/>
+    </sval>
+    <sval type="array" size="4">
+      <sval type="int" val="706"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="-536858108"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="104"/>
+      <sval type="int" val="-1610600184"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="131074"/>
+      <sval type="int" val="2"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="-1"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="400"/>
+      <sval type="int" val="5"/>
+      <sval type="string" val="Target destroyed"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="19"/>
+      <sval type="int" val="6"/>
+    </sval>
+    <sval type="array" size="1">
+      <sval type="int" val="1168"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="103"/>
+      <sval type="int" val="0"/>
+      <sval type="int" val="0"/>
+    </sval>
+  </sval>
+  <sval type="array" size="2">
+    <sval type="array" size="2">
+      <sval type="int" val="22"/>
+      <sval type="string" val="target to follow"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="string" val="precision"/>
+    </sval>
+  </sval>
+  <sval type="array" size="46">
+    <sval type="array" size="2">
+      <sval type="int" val="1"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="2"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="3"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="4"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="6"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="7"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="8"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="9"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="10"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="12"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="13"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="14"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="17"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="18"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="20"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="21"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="22"/>
+      <sval type="int" val="5"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="22"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="25"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="7">
+      <sval type="int" val="26"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="104"/>
+      <sval type="string" val="gate.precision"/>
+      <sval type="int" val="1"/>
+      <sval type="int" val="4"/>
+      <sval type="int" val="2000"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="26"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="28"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="14">
+      <sval type="int" val="28"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="570"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="aship"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="gate.x"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="gate.y"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="gate.z"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="gate.precision"/>
+    </sval>
+    <sval type="array" size="14">
+      <sval type="int" val="28"/>
+      <sval type="int" val="3"/>
+      <sval type="int" val="523"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="aship"/>
+      <sval type="int" val="-2147483647"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="gate.x"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="gate.y"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="gate.z"/>
+      <sval type="int" val="131074"/>
+      <sval type="string" val="gate.precision"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="29"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="29"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="29"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="29"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="32"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="33"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="33"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="35"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="36"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="36"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="--------------------------------------------------------------------------------"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="37"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="39"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="40"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="--------------------------------------------------------------------------------"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="41"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="42"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="44"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="45"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="3">
+      <sval type="int" val="45"/>
+      <sval type="int" val="1"/>
+      <sval type="string" val="--------------------------------------------------------------------------------"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="47"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="49"/>
+      <sval type="int" val="2"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="50"/>
+      <sval type="int" val="4"/>
+    </sval>
+    <sval type="array" size="2">
+      <sval type="int" val="51"/>
+      <sval type="int" val="2"/>
+    </sval>
+  </sval>
+  <sval type="int" val="0"/>
+</sval>
+
+</codearray>
+</script>
