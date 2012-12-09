@@ -1,9 +1,13 @@
 # Frachtaustausch per Drohne: Remake
 
+![Frachtdrohne](http://img3.imagebanana.com/img/d9ibkjf/frachtdrohne.jpg)
+
 Dieses Skript ermöglicht den funktionierenden Frachtaustausch per Drohne.
 Das Kommando befindet sich unter den Handelsbefehlen und unterscheidet sich vom EGO-Skript durch die gelbe Farbe.
 
 Die Handhabung ist gleich dem EGOSOFT-Skript. Das Verhalten jedoch etwas anders.
+
+Korrespondierender Thread im Egosoft-Forum: [[SCR] [17.03.09] Frachtaustausch per Drohne](http://forum.egosoft.com/viewtopic.php?p=2801714)
 
 ## Beschreibung:
 Mit dem Frachtaustausch per Drohne ist es möglich, Waren über große Strecken hinweg zwischen Schiffen und Stationen sowie zwischen Schiffen untereinander auszutauschen. Aufgrund der Nutzung von intergalaktischen Handelssoftware-Standards ist es nun auch möglich, die Drohnen an fremden Stationen ein- und verkaufen zu lassen. Durch ihre Größe bedingt können Frachtdrohnen nur von großen Schiffen eingesetzt werden.

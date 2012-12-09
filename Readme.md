@@ -1,9 +1,13 @@
 # Transfer Freight via Drones: Remake
 
+![Freight drone](http://img3.imagebanana.com/img/d9ibkjf/frachtdrohne.jpg)
+
 This script allows the working transfer of freight via drones.
 The command is located in the trade commands and differs from the EGO script by its yellow color.
 
 Usage is equal to the EGOSOFT script. However, the behaviour is a little different.
+
+Corresponding thread on the Egosoft forums: [[Script][Mar/17/2009] Transfer Freight via Drones - working](http://forum.egosoft.com/viewtopic.php?t=239069)
 
 ## Description:
 This command allows you to transfer freight to and from a station or ship over large distances. Intergalactic Trade Software Standards now make it possible for the drones to trade with foreign stations. Due to their size freight drones can only be used by big ships.
