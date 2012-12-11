@@ -13,20 +13,20 @@ Corresponding thread on the Egosoft forums: [[Script][Mar/17/2009] Transfer Frei
 This command allows you to transfer freight to and from a station or ship over large distances. Intergalactic Trade Software Standards now make it possible for the drones to trade with foreign stations. Due to their size freight drones can only be used by big ships.
 
 ## Requirements:
-* Ship of class big ship (except M8) - Using drones on a ship that is smaller than the drone makes no sense...
-* Trade Command Software Mk2
-* Freight Drone
+- Ship of class big ship (except M8) - Using drones on a ship that is smaller than the drone makes no sense...
+- Trade Command Software Mk2
+- Freight Drone
 
 ## Installation/Update:
-* Copy the contents of the `t` folder into the `X3 TC\t` folder
-* Copy the contents of the `scripts` folder into the `X3 TC\scripts` folder
-* If ChemODur's string library is already installed, the t files of it can be overwritten with the ones contained in this package. They contain minor fixes for german letters.
+- Copy the contents of the `t` folder into the `X3 TC\t` folder
+- Copy the contents of the `scripts` folder into the `X3 TC\scripts` folder
+- If ChemODur's string library is already installed, the t files of it can be overwritten with the ones contained in this package. They contain minor fixes for german letters.
 
 ## Deinstallation:
-* Cancel all running transfers (collect the drones or give them another command)
-* Save
-* Quit X3 and remove the scripts' files from the `scripts` folder (see "Used Files")
-* Remove the language file from the `t` folder (see "Used Files")
+- Cancel all running transfers (collect the drones or give them another command)
+- Save
+- Quit X3 and remove the scripts' files from the `scripts` folder (see "Used Files")
+- Remove the language file from the `t` folder (see "Used Files")
 
 ## Behaviour:
 If more wares than a single drone can carry are selected more drones are used and the selected wares are distributed between them.
@@ -40,34 +40,34 @@ _This case has not yet been tested properly_
 
 ## Used Files:
 
-* `t\8222-L044.xml`
-* `t\8222-L049.xml`
-* `t\8910-L007.xml` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-* `t\8910-L044.xml` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-* `t\8910-L049.xml` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `t\8222-L044.xml`
+- `t\8222-L049.xml`
+- `t\8910-L007.xml` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `t\8910-L044.xml` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `t\8910-L049.xml` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
 
-* `scripts\lib.chem.strings.xml` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-* `scripts\plugin.freight.drone.delivery.xml`
-* `scripts\plugin.freight.drone.gui.xml`
-* `scripts\setup.freight.drone.move.xml`
-* `scripts\plugin.freight.drone.target.xml`
-* `scripts\plugin.freight.drone.transfer.xml`
-* `scripts\plugin.freight.drone.wares.xml`
-* `scripts\setup.freight.drone.transfer.xml`
+- `scripts\lib.chem.strings.xml` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `scripts\plugin.freight.drone.delivery.xml`
+- `scripts\plugin.freight.drone.gui.xml`
+- `scripts\setup.freight.drone.move.xml`
+- `scripts\plugin.freight.drone.target.xml`
+- `scripts\plugin.freight.drone.transfer.xml`
+- `scripts\plugin.freight.drone.wares.xml`
+- `scripts\setup.freight.drone.transfer.xml`
 
 ## Used Resources:
 
 ### Command Slot
-`COMMAND_TYPE_TRADE_22 (422)` ->"COMMAND_DRONE_WARE_EXCHANGE"
+- `COMMAND_TYPE_TRADE_22 (422)` ->"COMMAND_DRONE_WARE_EXCHANGE"
 
-### Language Files 
-`8222-L044.xml (page id=8222)`
-`8222-L049.xml (page id=8222)`
-`8910-L007.xml (page id=8910)` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-`8910-L044.xml (page id=8910)` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-`8910-L049.xml (page id=8910)` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+### Language Files
+- `8222-L044.xml (page id=8222)`
+- `8222-L049.xml (page id=8222)`
+- `8910-L007.xml (page id=8910)` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `8910-L044.xml (page id=8910)` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `8910-L049.xml (page id=8910)` <-------String Library by ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
 
-## Changelog:
+## Change Log:
 
 ### 2009-03-17: v beta 07
 

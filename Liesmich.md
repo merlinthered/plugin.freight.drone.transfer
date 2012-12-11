@@ -13,21 +13,21 @@ Korrespondierender Thread im Egosoft-Forum: [[SCR] [17.03.09] Frachtaustausch pe
 Mit dem Frachtaustausch per Drohne ist es möglich, Waren über große Strecken hinweg zwischen Schiffen und Stationen sowie zwischen Schiffen untereinander auszutauschen. Aufgrund der Nutzung von intergalaktischen Handelssoftware-Standards ist es nun auch möglich, die Drohnen an fremden Stationen ein- und verkaufen zu lassen. Durch ihre Größe bedingt können Frachtdrohnen nur von großen Schiffen eingesetzt werden.
 
 ## Voraussetzungen:
-* Schiff der Grosschiffklasse (außer M8) - Es macht keinen Sinn, Frachtdrohnen auf Schiffen einzusetzen, die kleiner als die Drohne sind...
-* Handelssoftware Mk2
-* Frachtdrohne
+- Schiff der Grosschiffklasse (außer M8) - Es macht keinen Sinn, Frachtdrohnen auf Schiffen einzusetzen, die kleiner als die Drohne sind...
+- Handelssoftware Mk2
+- Frachtdrohne
 
 ## Installation/Update:
-* Den Inhalt des Ordners `t` in den `X3 TC\t` Ordner kopieren
-* Den Inhalt des Ordners `scripts` in den `X3 TC\scripts` Ordner kopieren
-* Wenn die String-Library von ChemODur bereits installiert ist, kann diese Version ruhig darübergeschrieben werden. Sie enthält ein paar kleine fixes für deutsche Buchstaben.
+- Den Inhalt des Ordners `t` in den `X3 TC\t` Ordner kopieren
+- Den Inhalt des Ordners `scripts` in den `X3 TC\scripts` Ordner kopieren
+- Wenn die String-Library von ChemODur bereits installiert ist, kann diese Version ruhig darübergeschrieben werden. Sie enthält ein paar kleine fixes für deutsche Buchstaben.
 
 
 ## Deinstallation:
-* Im Spiel alle laufenden Frachttransfere abbrechen (den Drohnen einen anderen Befehl geben oder einsammeln)
-* Speichern
-* X3 verlassen und die Dateien des Skripts aus dem `scripts` Ordner löschen (s. "Verwendete Dateien")
-* Die t-Datei aus dem `t` Ordner löschen (s. "Verwendete Dateien")
+- Im Spiel alle laufenden Frachttransfers abbrechen (den Drohnen einen anderen Befehl geben oder einsammeln)
+- Speichern
+- X3 verlassen und die Dateien des Skripts aus dem `scripts` Ordner löschen (s. "Verwendete Dateien")
+- Die t-Datei aus dem `t` Ordner löschen (s. "Verwendete Dateien")
 
 ## Verhalten:
 Wenn mehr Waren eingestellt werden, als eine Drohne transportieren kann, werden mehrere Drohnen gestartet und die Waren auf diese aufgeteilt.
@@ -43,32 +43,32 @@ _Anm: Dieser Fall ist bisher noch nicht ausreichend getestet_
 
 ## Verwendete Dateien:
 
-`t\8222-L044.xml`
-`t\8222-L049.xml`
-`t\8910-L007.xml` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-`t\8910-L044.xml` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-`t\8910-L049.xml` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `t\8222-L044.xml`
+- `t\8222-L049.xml`
+- `t\8910-L007.xml` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `t\8910-L044.xml` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `t\8910-L049.xml` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
 
-`scripts\lib.chem.strings.xml` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-`scripts\plugin.freight.drone.delivery.xml`
-`scripts\plugin.freight.drone.gui.xml`
-`scripts\setup.freight.drone.move.xml`
-`scripts\plugin.freight.drone.target.xml`
-`scripts\plugin.freight.drone.transfer.xml`
-`scripts\plugin.freight.drone.wares.xml`
-`scripts\setup.freight.drone.transfer.xml`
+- `scripts\lib.chem.strings.xml` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `scripts\plugin.freight.drone.delivery.xml`
+- `scripts\plugin.freight.drone.gui.xml`
+- `scripts\setup.freight.drone.move.xml`
+- `scripts\plugin.freight.drone.target.xml`
+- `scripts\plugin.freight.drone.transfer.xml`
+- `scripts\plugin.freight.drone.wares.xml`
+- `scripts\setup.freight.drone.transfer.xml`
 
 ## Verwendete Ressourcen:
 
 ### Kommandoslot
-`COMMAND_TYPE_TRADE_22 (422)` ->"COMMAND_DRONE_WARE_EXCHANGE"
+- `COMMAND_TYPE_TRADE_22 (422)` ->"COMMAND_DRONE_WARE_EXCHANGE"
 
 ### Sprachdatei 
-`8222-L044.xml (page id=8222)`
-`8222-L049.xml (page id=8222)`
-`8910-L007.xml (page id=8910)` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-`8910-L044.xml (page id=8910)` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
-`8910-L049.xml (page id=8910)` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `8222-L044.xml (page id=8222)`
+- `8222-L049.xml (page id=8222)`
+- `8910-L007.xml (page id=8910)` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `8910-L044.xml (page id=8910)` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
+- `8910-L049.xml (page id=8910)` <-------String Library von ChemODur!! http://forum.egosoft.com/viewtopic.php?t=233377
 
 ## Changelog:
 
